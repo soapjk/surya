@@ -10,12 +10,15 @@ import json
 
 
 def get_name_from_path(path):
-    return os.path.basename(path).split(".")[0]
+    splited_names = list(os.path.basename(path).split("."))
+    splited_names = splited_names[:-1]
+    return "_".join(splited_names)
 
 
 def load_pdf(pdf_path, max_pages=None, start_page=None, dpi=settings.IMAGE_DPI, load_text_lines=False, flatten_pdf=settings.FLATTEN_PDF):
     doc = open_pdf(pdf_path)
     last_page = len(doc)
+
 
     if start_page:
         assert start_page < last_page and start_page >= 0, f"Start page must be between 0 and {last_page}"
